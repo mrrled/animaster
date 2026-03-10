@@ -72,15 +72,21 @@ function animaster(){
 
     function resetFadeIn(element){
         element.style.transitionDuration = null;
+        element.classList.remove('show');
+        element.classList.add('hide');
     }
 
     function resetFadeOut(element){
         element.style.transitionDuration = null;
+        element.classList.remove('hide');
+        element.classList.add('show');
     }
 
     function resetMoveAndScale(element){
         element.style.transitionDuration = null;
         element.style.transform = null;
+        element.style.transform = getTransform(0, 1);
+
     }
 
     return {move, scale, fadeIn, fadeOut, moveAndHide, showAndHide, heartBreaking, resetFadeIn, resetFadeOut, resetMoveAndScale};
@@ -95,7 +101,7 @@ function addListeners() {
             animaster().fadeIn(block, 5000);
         });
 
-     document.getElementById('heartBreakingStop')
+    document.getElementById('heartBreakingStop')
         .addEventListener('click', function () {
             stopper.stop();
         });
@@ -134,6 +140,30 @@ function addListeners() {
         .addEventListener('click', function () {
             const block = document.getElementById('heartBreakingBlock');
             stopper = animaster().heartBreaking(block);
+        });
+
+    document.getElementById('fadeInReset')
+        .addEventListener('click', function () {
+            const block = document.getElementById('fadeInBlock');
+            animaster().resetFadeIn(block);
+        });
+        
+    document.getElementById('fadeOutReset')
+        .addEventListener('click', function () {
+            const block = document.getElementById('fadeOutBlock');
+            animaster().resetFadeOut(block);
+        });
+    
+     document.getElementById('scaleReset')
+        .addEventListener('click', function () {
+            const block = document.getElementById('scaleBlock');
+            animaster().resetMoveAndScale(block);
+        });
+
+    document.getElementById('moveReset')
+        .addEventListener('click', function () {
+            const block = document.getElementById('moveBlock');
+            animaster().resetMoveAndScale(block);
         });
 }
 
