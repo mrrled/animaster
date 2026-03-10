@@ -1,6 +1,27 @@
 addListeners();
 
+function empty(){
+    return -1;
+}
 function animaster(){
+    function moveAndHide(block, duration){
+        move(block, duration * 2/5, {x: 100, y: 20})
+        fadeOut(block, duration * 3/5)
+    }
+    function showAndHide(block, duration){
+        const time = duration / 3;
+        fadeIn(block, time);
+        setTimeout(empty, time);
+        fadeOut(block, time);
+    }
+
+    function heartBreaking(element){
+        while (true){
+            scale(element, 500, 1.4)
+            scale(element, 500, 1)
+        }
+    }
+
     /**
      * Блок плавно появляется из прозрачного.
      * @param element — HTMLElement, который надо анимировать
@@ -40,7 +61,7 @@ function animaster(){
         element.style.transform = getTransform(null, ratio);
     }
 
-    return {move, scale, fadeIn, fadeOut};
+    return {move, scale, fadeIn, fadeOut, moveAndHide, showAndHide, heartBreaking};
 }
 
 function addListeners() {
@@ -66,6 +87,24 @@ function addListeners() {
         .addEventListener('click', function () {
             const block = document.getElementById('scaleBlock');
             animaster().scale(block, 1000, 1.25);
+        });
+
+    document.getElementById('moveAndHidePlay')
+        .addEventListener('click', function () {
+            const block = document.getElementById('moveAndHideBlock');
+            animaster().moveAndHide(block, 5000);
+        });
+
+    document.getElementById('showAndHidePlay')
+        .addEventListener('click', function () {
+            const block = document.getElementById('showAndHideBlock');
+            animaster().show(block, 1000);
+        });
+
+    document.getElementById('heartBreakingPlay')
+        .addEventListener('click', function () {
+            const block = document.getElementById('heartBreakingBlock');
+            animaster().heartBreaking(block);
         });
 }
 
