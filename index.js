@@ -61,10 +61,10 @@ function animaster(){
     function moveAndHide(element, duration){
         let step = {
             duration: duration * 2/5,
-            name: "fadeOut",
+            name: "move",
             translation: {x: 100, y: 20},
             ratio:undefined,
-            func: fadeOut
+            func: move
         }
         move(element, step)
         
@@ -81,14 +81,42 @@ function animaster(){
     }
     function showAndHide(element, duration){
         const time = duration / 3;
-        fadeIn(element, time);
-        setTimeout(fadeOut, time, element, time);
+        let step = {
+            duration: time,
+            name: "fadeIn",
+            translation: undefined,
+            ratio:undefined,
+            func: fadeIn
+        }
+        let step2 = {
+            duration: time,
+            name: "fadeOut",
+            translation: undefined,
+            ratio:undefined,
+            func: fadeOut
+        }
+        fadeIn(element, step);
+        setTimeout(fadeOut, time, element, step2);
     }
 
     function heartBreaking(element, duration) {
+        let step = {
+            duration: 500,
+            name: "scale",
+            translation: undefined,
+            ratio:1.4,
+            func: scale
+        }
+        let step2 = {
+            duration: 500,
+            name: "scale",
+            translation: undefined,
+            ratio:1,
+            func: scale
+        }
         let timer = setTimeout(function run() {
-            scale(element, 500, 1.4);
-            setTimeout(scale, 250, element, 500, 1);
+            scale(element, step);
+            setTimeout(scale, 250, element, step2);
             timer = setTimeout(run, 500);
         }, 0);
         
@@ -235,6 +263,21 @@ function addListeners() {
             const block = document.getElementById('moveBlock');
             animaster().resetMoveAndScale(block);
         });
+    document.getElementById('customPlay')
+        .addEventListener('click', function () {
+            const block = document.getElementById('customBlock');
+            const customAnimation = animaster()
+                .addMove(200, {x: 40, y: 40})
+                .addScale(800, 1.3)
+                .addMove(200, {x: 80, y: 0})
+                .addScale(800, 1)
+                .addMove(200, {x: 40, y: -40})
+                .addScale(800, 0.7)
+                .addMove(200, {x: 0, y: 0})
+                .addScale(800, 1);
+            customAnimation.play(block);
+        });
+
 }
 
 
