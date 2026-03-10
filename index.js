@@ -14,11 +14,12 @@ function animaster(){
         setTimeout(fadeOut, time, block, time);
     }
 
-    function heartBreaking(element){
-        while (true){
-            scale(element, 500, 1.4)
-            scale(element, 500, 1)
-        }
+    function heartBreaking(element) {
+        setTimeout(function run() {
+            scale(element, 500, 1.4);
+            setTimeout(scale, 250, element, 500, 1);
+            setTimeout(run, 500);
+        }, 0);
     }
 
     /**
