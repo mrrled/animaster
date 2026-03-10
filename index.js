@@ -61,7 +61,20 @@ function animaster(){
         element.style.transform = getTransform(null, ratio);
     }
 
-    return {move, scale, fadeIn, fadeOut, moveAndHide, showAndHide, heartBreaking};
+    function resetFadeIn(element){
+        element.style.transitionDuration = null;
+    }
+
+    function resetFadeOut(element){
+        element.style.transitionDuration = null;
+    }
+
+    function resetMoveAndScale(element){
+        element.style.transitionDuration = null;
+        element.style.transform = null;
+    }
+
+    return {move, scale, fadeIn, fadeOut, moveAndHide, showAndHide, heartBreaking, resetFadeIn, resetFadeOut, resetMoveAndScale};
 }
 
 function addListeners() {
@@ -98,7 +111,7 @@ function addListeners() {
     document.getElementById('showAndHidePlay')
         .addEventListener('click', function () {
             const block = document.getElementById('showAndHideBlock');
-            animaster().show(block, 1000);
+            animaster().showAndHide(block, 1000);
         });
 
     document.getElementById('heartBreakingPlay')
