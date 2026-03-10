@@ -58,20 +58,34 @@ function animaster(){
         }
     }
 
-    function moveAndHide(element, step){
-        move(element, step.duration * 2/5, {x: 100, y: 20})
+    function moveAndHide(element, duration){
+        let step = {
+            duration: duration * 2/5,
+            name: "fadeOut",
+            translation: {x: 100, y: 20},
+            ratio:undefined,
+            func: fadeOut
+        }
+        move(element, step)
         
+        let step2 = {
+            duration: duration * 3/5,
+            name: "fadeOut",
+            translation: undefined,
+            ratio:undefined,
+            func: fadeOut
+        }
         setTimeout(() => {
-        fadeOut(element, step.duration * 3/5);
-    }, step.duration * 2/5);
+        fadeOut(element, step2);
+    }, duration * 2/5);
     }
-    function showAndHide(element, step){
-        const time = step.duration / 3;
+    function showAndHide(element, duration){
+        const time = duration / 3;
         fadeIn(element, time);
         setTimeout(fadeOut, time, element, time);
     }
 
-    function heartBreaking(element, step) {
+    function heartBreaking(element, duration) {
         let timer = setTimeout(function run() {
             scale(element, 500, 1.4);
             setTimeout(scale, 250, element, 500, 1);
