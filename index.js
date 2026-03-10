@@ -6,7 +6,10 @@ function empty(){
 function animaster(){
     function moveAndHide(block, duration){
         move(block, duration * 2/5, {x: 100, y: 20})
-        fadeOut(block, duration * 3/5)
+        
+        setTimeout(() => {
+        fadeOut(block, duration * 3/5);
+    }, duration * 2/5);
     }
     function showAndHide(block, duration){
         const time = duration / 3;
