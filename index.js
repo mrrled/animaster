@@ -11,8 +11,7 @@ function animaster(){
     function showAndHide(block, duration){
         const time = duration / 3;
         fadeIn(block, time);
-        setTimeout(empty, time);
-        fadeOut(block, time);
+        setTimeout(fadeOut, time, block, time);
     }
 
     function heartBreaking(element){
@@ -111,7 +110,7 @@ function addListeners() {
     document.getElementById('showAndHidePlay')
         .addEventListener('click', function () {
             const block = document.getElementById('showAndHideBlock');
-            animaster().showAndHide(block, 1000);
+            animaster().showAndHide(block, 10000);
         });
 
     document.getElementById('heartBreakingPlay')
