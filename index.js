@@ -40,6 +40,19 @@ function animaster(){
         element.style.transform = getTransform(null, ratio);
     }
 
+    function resetFadeIn(element){
+        element.style.transitionDuration = null;
+    }
+
+    function resetFadeOut(element){
+        element.style.transitionDuration = null;
+    }
+
+    function resetMoveAndScale(element){
+        element.style.transitionDuration = null;
+        element.style.transform = null;
+    }
+
     return {move, scale, fadeIn, fadeOut};
 }
 
